@@ -23,32 +23,23 @@ def par(n):
     Retorna True se for par ou False caso contrário.
     Dica: a expressão 5 % 3 vale 2 pois 2 é o resto da divisão de 5 por 3.
     """
-    if n % 2 == 0:
-        return True
-    else:
-        return False
+    return n % 2 == 0
 
 
 def menor_de_tres_numeros(n1, n2, n3):
     """Encontra o menor de três números.
     """
-    if n1 < n2 and n1 < n3:
-        return n1
-    elif n2 < n1 and n2 < n3:
-        return n2
-    else:
-        return n3
+    menor = n1 if n1 < n2 else n2
+    return n3 if n3 < menor else menor
+
 
 def maior_que(n1, n2):
     """Verifica se o primeiro número é maior que segundo número.
 
     Retorna True se n1 for maior que n2 ou False caso contrário.
     """
-    if n1 > n2:
-        return True
-    else:
-        return False
-
+    return n1 > n2
+    
 
 def divisivel_por(n1, n2):
     """Verifica se o primeiro número é divisível pelo segundo número.
@@ -57,11 +48,8 @@ def divisivel_por(n1, n2):
     Observação: considera que n1 sempre é maior ou igual a zero e que
     n2 sempre é maior que zero.
     """
-    if n1 % n2 == 0:
-        return True
-    else:
-        return False
-
+    return n1 % n2 == 0 
+    
 
 def multiplica(n1, n2):
     """Multiplica dois números maiores ou iguais a zero.
@@ -69,8 +57,10 @@ def multiplica(n1, n2):
     Atenção: seu algoritmo não pode usar o símbolo '*'.
     """        
     produto = 0
-    for i in range(n2):
+    for i in range(abs(n2)):
         produto += n1 
+    if n1 and n2 < 0:
+        produto *= -1
     return produto
 
 
@@ -83,14 +73,6 @@ def divide(n1, n2):
     sempre será maior que zero.
     Atenção: seu algoritmo não pode usar o símbolo '//'.
     """
-    '''divisao = n1
-    for i in range(n1):
-        divisao -= n2
-        i += 1
-        if divisao == 0:
-            break
-    return i'''
-
     divisao = 0
     while n1 >= n2:
         n1 -= n2
@@ -106,11 +88,8 @@ def bissexto(ano):
     Um ano é bissexto se for divisível por 400 ou então
     se for divisível por 4 e, ao mesmo tempo, não for divisível por 100.
     """
-    if ano % 400 == 0 or ano % 4 == 0 and ano % 100 != 0:
-        return True
-    else:
-        return False
-
+    return ano % 400 == 0 or ano % 4 == 0 and ano % 100 != 0
+    
 
 def mdc(n1, n2):
     """Calcula o Máximo Divisor Comum entre dois números inteiros positivos.
@@ -119,13 +98,30 @@ def mdc(n1, n2):
     http://www.mundoeducacao.com/matematica/mdc-divisoes-sucessivas.htm
     """
 
+    # Garantir que n1 sempre será maior que n2
+    num = 0
+    if n1 < n2:
+        n1, n2 = n2, n1
+
+    resto = n1 % n2
+    while resto != 0:
+        n1 = n2
+        n2 = resto
+        resto = n1 % n2
+    return n2
+
 
 def soma_dos_divisores(n):
     """Calcula a soma dos divisores de um número inteiro maior que zero.
 
     Dica: a metade de n é n // 2.
     """
-  
+    soma_div = 0
+    for i in range(1,n+1):
+        if n % i == 0:
+            soma_div += i
+    return soma_div
+
 
 def amigos(n1, n2):
     """Verifica se dois números inteiros positivos são amigos.
@@ -133,7 +129,28 @@ def amigos(n1, n2):
     Retorna True se números são amigos ou False caso contrário.
     Dica: Números Amigos: http://www.matematica.br/historia/namigos.html
     """
-   
+    divisores = 0
+    antecessor = n1 - 1
+    while antecessor != 0:
+        if n1 % antecessor == 0:
+            divisores += antecessor
+        else:
+            divisores += 0
+        antecessor -= 1
+
+    divisores_2 = 0
+    antecessor_2 = n2 - 1
+    while antecessor_2 != 0:
+        if n2 % antecessor_2 == 0:
+            divisores_2 += antecessor_2
+        else:
+            divisores_2 += 0
+        antecessor_2 -= 1
+    
+    if divisores == n2 and divisores_2 == n1:
+        return True
+    else:
+        return False
 
 def primo(n):
     """Verifica se número é primo.
