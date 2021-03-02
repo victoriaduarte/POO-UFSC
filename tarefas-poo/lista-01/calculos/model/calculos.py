@@ -104,7 +104,7 @@ def mdc(n1, n2):
         n1, n2 = n2, n1
 
     resto = n1 % n2
-    while resto != 0:
+    while resto > 0:
         n1 = n2
         n2 = resto
         resto = n1 % n2
@@ -147,10 +147,8 @@ def amigos(n1, n2):
             divisores_2 += 0
         antecessor_2 -= 1
     
-    if divisores == n2 and divisores_2 == n1:
-        return True
-    else:
-        return False
+    return divisores == n2 and divisores_2 == n1
+
 
 def primo(n):
     """Verifica se número é primo.
@@ -159,11 +157,12 @@ def primo(n):
     Retorna True se n for primo ou False caso contrário.
     """
     if n % 2 == 0 and n != 2:
-        return False
+        resultado = False
     elif n % 3 == 0 and n != 3:
-        return False
+        resultado = False
     else:
-        return True
+        resultado = True
+    return resultado
 
 
 def composto(n):
@@ -173,11 +172,6 @@ def composto(n):
     Retorna True se n for número composto ou False caso contrário.
     Definição: um número é composto se possui mais de dois divisores.
     """
-    if n % 2 == 0 and n != 2:
-        return True
-    elif n % 3 == 0 and n != 3:
-        return True
-    else:
-        return False
+    return not primo(n)
 
 

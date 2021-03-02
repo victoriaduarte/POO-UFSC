@@ -109,10 +109,6 @@ try:
     assert produto == 49, f'multiplica(7,7) deveria retornar 49 mas retornou {produto}'
     produto = multiplica(0,0)
     assert produto == 0, f'multiplica(0,0) deveria retornar 0 mas retornou {produto}'
-    produto = multiplica(-8,5)
-    assert produto == -40, f'multiplica(-8,5) deveria retornar -40 mas retornou {produto}'
-    produto = multiplica(-8,-5)
-    assert produto == 40, f'multiplica(-8,-5) deveria retornar 40 mas retornou {produto}'
     print('multiplica ok')
 except Exception as e:
     print(e)
